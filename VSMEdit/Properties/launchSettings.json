@@ -1,0 +1,45 @@
+{
+  "profiles": {
+    "VWLmergeR": {
+      "commandName": "Project"
+    },
+    "Help Message": {
+      "commandName": "Project",
+      "commandLineArgs": "--help"
+    },
+    "Connection test (Test)": {
+      "commandName": "Project",
+      "commandLineArgs": "--test connection"
+    },
+    "Merge 2018 (Test)": {
+      "commandName": "Project",
+      "commandLineArgs": "--test 2018"
+    },
+    "Wrong Year test": {
+      "commandName": "Project",
+      "commandLineArgs": "1992"
+    },
+    "No Server config test": {
+      "commandName": "Project",
+      "commandLineArgs": "2018"
+    },
+    "Publish: Windows": {
+      "commandName": "Executable",
+      "executablePath": "%windir%\\System32\\cmd.exe",
+      "commandLineArgs": "/c dotnet publish -r win-x64 -c Release /p:PublishSingleFile=true /p:PublishTrimmed=true ",
+      "workingDirectory": ".."
+    },
+    "Publish: MacOS": {
+      "commandName": "Executable",
+      "executablePath": "%windir%\\System32\\cmd.exe",
+      "commandLineArgs": "/c dotnet publish -r osx-x64 -c Release /p:PublishSingleFile=true /p:PublishTrimmed=true ",
+      "workingDirectory": ".."
+    },
+    "Publish: Linux": {
+      "commandName": "Executable",
+      "executablePath": "%windir%\\System32\\cmd.exe",
+      "commandLineArgs": "/c dotnet publish -r linux-x64 -c Release /p:PublishSingleFile=true /p:PublishTrimmed=tru",
+      "workingDirectory": ".."
+    }
+  }
+}
