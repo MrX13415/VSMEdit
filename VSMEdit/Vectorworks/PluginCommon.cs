@@ -17,15 +17,15 @@ namespace VSMEdit.Vectorworks
     public partial class Plugin
     {
   
-        public FileInfo File { get; private set; }
+        public FileInfo PluginFile { get; private set; }
         
-        public PluginType Type => GetType(File.Extension);
+        public PluginType Type => GetType(PluginFile.Extension);
 
 
         public Plugin(string filePath)
         {
-            this.File = new FileInfo(filePath);
-            if (!File.Exists) throw new FileNotFoundException();
+            this.PluginFile = new FileInfo(filePath);
+            if (!PluginFile.Exists) throw new FileNotFoundException();
         }
       
 

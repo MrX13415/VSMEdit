@@ -1,7 +1,8 @@
 {
   "profiles": {
     "VWLmergeR": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\Users\\odaus\\AppData\\Roaming\\Nemetschek\\Vectorworks\\2020\\Plug-ins\\MyToolCW.vsm\""
     },
     "Help Message": {
       "commandName": "Project",

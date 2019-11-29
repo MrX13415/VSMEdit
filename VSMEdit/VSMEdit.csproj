@@ -17,4 +17,8 @@
     <PackageReference Include="SSH.NET.Fork" Version="2018.8.25.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Vectorworks\NewFolder\" />
+  </ItemGroup>
+
 </Project>
