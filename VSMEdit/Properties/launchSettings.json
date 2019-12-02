@@ -1,28 +1,8 @@
 {
   "profiles": {
-    "VWLmergeR": {
-      "commandName": "Project",
-      "commandLineArgs": "\"C:\\Users\\odaus\\AppData\\Roaming\\Nemetschek\\Vectorworks\\2020\\Plug-ins\\MyToolCW.vsm\""
-    },
     "Help Message": {
       "commandName": "Project",
       "commandLineArgs": "--help"
-    },
-    "Connection test (Test)": {
-      "commandName": "Project",
-      "commandLineArgs": "--test connection"
-    },
-    "Merge 2018 (Test)": {
-      "commandName": "Project",
-      "commandLineArgs": "--test 2018"
-    },
-    "Wrong Year test": {
-      "commandName": "Project",
-      "commandLineArgs": "1992"
-    },
-    "No Server config test": {
-      "commandName": "Project",
-      "commandLineArgs": "2018"
     },
     "Publish: Windows": {
       "commandName": "Executable",
@@ -41,6 +21,53 @@
       "executablePath": "%windir%\\System32\\cmd.exe",
       "commandLineArgs": "/c dotnet publish -r linux-x64 -c Release /p:PublishSingleFile=true /p:PublishTrimmed=tru",
       "workingDirectory": ".."
+    },
+    "VSMEdit": {
+      "commandName": "Project"
+    },
+    "Attribute List": {
+      "commandName": "Project",
+      "commandLineArgs": "-a"
+    },
+    "Get: UniversalName": {
+      "commandName": "Project",
+      "commandLineArgs": "--get UniversalName \"$(SolutionDir)\\VSMEdit\\TestFiles\\MyToolCW.vsm\""
+    },
+    "Test: Get invalid field name": {
+      "commandName": "Project",
+      "commandLineArgs": "--get somefield \"$(SolutionDir)\\VSMEdit\\TestFiles\\MyToolCW.vsm\""
+    },
+    "Test: Get ambiguous field name": {
+      "commandName": "Project",
+      "commandLineArgs": "--get e \"$(SolutionDir)\\VSMEdit\\TestFiles\\MyToolCW.vsm\""
+    },
+    "Get: ByteOrdering": {
+      "commandName": "Project",
+      "commandLineArgs": "--get ByteOrdering \"$(SolutionDir)\\VSMEdit\\TestFiles\\MyToolCW.vsm\""
+    },
+    "Get: PluginType": {
+      "commandName": "Project",
+      "commandLineArgs": "--get PluginType \"$(SolutionDir)\\VSMEdit\\TestFiles\\MyToolCW.vsm\""
+    },
+    "Get: FileVersion": {
+      "commandName": "Project",
+      "commandLineArgs": "--get FileVersion \"$(SolutionDir)\\VSMEdit\\TestFiles\\MyToolCW.vsm\""
+    },
+    "Get: Category": {
+      "commandName": "Project",
+      "commandLineArgs": "--get Category \"$(SolutionDir)\\VSMEdit\\TestFiles\\MyToolCW.vsm\""
+    },
+    "Get: LocalizedName": {
+      "commandName": "Project",
+      "commandLineArgs": "--get LocalizedName \"$(SolutionDir)\\VSMEdit\\TestFiles\\MyToolCW.vsm\""
+    },
+    "Set: UniversalName": {
+      "commandName": "Project",
+      "commandLineArgs": "--set UniversalName \"MyToolCW\" \"$(SolutionDir)\\VSMEdit\\TestFiles\\MyToolCW.vsm\""
+    },
+    "Test: Set too long UniversalName": {
+      "commandName": "Project",
+      "commandLineArgs": "--set UniversalName \"123456789012345678901234567890123456789012345678901234567890123ABCDEF\" \"$(SolutionDir)\\VSMEdit\\TestFiles\\MyToolCW.vsm\""
     }
   }
 }

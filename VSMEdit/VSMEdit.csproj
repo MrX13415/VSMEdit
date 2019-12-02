@@ -4,21 +4,19 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <Copyright>(c) 2019 ComputerWorks GmbH. All rights reserved.</Copyright>
-    <Version>1.1</Version>
+    <Version>1.0</Version>
     <Authors>Oliver Daus</Authors>
     <Company>ComputerWorks GmbH</Company>
     <Product>Vectorworks</Product>
-    <Description>Remote application to merge the manifest files used by the Vectorworks PackageManager from ComputerWorks and Extragroup.</Description>
+    <Description>A command line utility for changing various attributes of Vectorworks script plugins. (.vsm; .vso; .vst)</Description>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageId>VSMEdit</PackageId>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="SSH.NET.Fork" Version="2018.8.25.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Vectorworks\NewFolder\" />
   </ItemGroup>
 
 </Project>

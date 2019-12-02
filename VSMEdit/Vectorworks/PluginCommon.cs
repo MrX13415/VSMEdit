@@ -2,18 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using static VSMEdit.Vectorworks.Plugin.FieldData;
 
 namespace VSMEdit.Vectorworks
 {
-    public enum PluginType
-    {
-        Invalid,
-        Menu,
-        Tool,
-        Object
-    }
-
-
     public partial class Plugin
     {
   
@@ -39,7 +31,8 @@ namespace VSMEdit.Vectorworks
                     return ".vst";               
                 case PluginType.Object:
                     return ".vso";               
-                case PluginType.Invalid:
+                case PluginType.TextFile:
+                    return ".txt"; // TODO: txt file extension??
                 default:
                     return null;               
             }
@@ -57,6 +50,7 @@ namespace VSMEdit.Vectorworks
                     return PluginType.Tool;
                 case ".vso":
                     return PluginType.Object;
+                    // TODO: txt file extension??
                 default:
                     return PluginType.Invalid;
             }

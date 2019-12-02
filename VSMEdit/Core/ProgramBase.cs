@@ -9,6 +9,14 @@ using VWLmergeR.Extensions;
 namespace VWLmergeR
 {
 
+    public enum HeaderDisplay
+    {
+        Never = 1,
+        Always = 2,
+        Help = 4,
+        Errors = 8,         
+    }
+
     public enum FlagOperation
     {
         Continue,
@@ -44,6 +52,7 @@ namespace VWLmergeR
         /// </summary>
         /// <returns>The header as string.</returns>
         public static string Header => $"{Name} -- v{Version.ToString(2)} -- {Copyright} | {Framework}";
+        public HeaderDisplay HeaderDisplay { get; set; } = HeaderDisplay.Always;
 
         public string[] Arguments { get; private set; }
 
@@ -56,8 +65,7 @@ namespace VWLmergeR
         { 
             Console.OutputEncoding = Encoding.UTF8;
 
-            Console.WriteLine(Header);
-            Console.WriteLine();
+            DisplayHeader(HeaderDisplay.Always);
 
             int exitcode = 0;
             if (exitcode == 0) exitcode = HandleArgs(Arguments);
@@ -71,6 +79,7 @@ namespace VWLmergeR
         {
             if (args.Length == 0)
             {
+                DisplayHeader(HeaderDisplay.Errors);
                 Console.Error.WriteLine("No arguments. " + HelpAdvice);
                 Thread.Sleep(1500);
                 return 101;
@@ -92,11 +101,17 @@ namespace VWLmergeR
                 {
                     if (currentFlag != null && currentFlag.ArgumentCount > 0)
                     {
-                        OnFlagArgument(currentFlag, arg, flagArgIndex);
+                        OnFlagArgument(ref currentFlag, arg, flagArgIndex);
                         flagArgIndex++;
+                        if (flagArgIndex >= currentFlag.ArgumentCount)
+                        {
+                            flagArgIndex = 0;
+                            currentFlag = null;
+                        }
+                        continue;
                     }
-                    OnArgument(arg, argIndex);
 
+                    OnArgument(arg, argIndex);
                     argIndex++;
                 }
 
@@ -107,6 +122,7 @@ namespace VWLmergeR
                 bool validFlag = OnFlag(ref flagEvent);
                 if (!validFlag)
                 {
+                    DisplayHeader(HeaderDisplay.Errors);
                     Console.Error.WriteLine("Invalid argument. " + HelpAdvice);
                     return 102;
                 }
@@ -114,6 +130,7 @@ namespace VWLmergeR
                 switch (flagEvent.Operation)
                 {
                     case FlagOperation.DisplayHelp:
+                        DisplayHeader(HeaderDisplay.Help);
                         Console.WriteLine(HelpText);
                         return 100; // Help Message displayed
                     case FlagOperation.Quit:
@@ -123,10 +140,7 @@ namespace VWLmergeR
                     default: break;
                 }
 
-                if (currentFlag.ArgumentCount > 0)
-                {
-                    currentFlag = flagEvent;
-                }
+                if (flagEvent.ArgumentCount > 0) currentFlag = flagEvent;
             }
 
             return 0;
@@ -136,44 +150,23 @@ namespace VWLmergeR
         public abstract void OnFlagArgument(ref FlagEvent flag, string arg, int argIndex);
         public abstract bool OnFlag(ref FlagEvent flag);
 
+        public abstract string[] GetHelpTextLines();
+
         public abstract int Run();
+
+        private void DisplayHeader(HeaderDisplay display)
+        {
+            if (HeaderDisplay.HasFlag(HeaderDisplay.Never)) return;
+            if (HeaderDisplay.HasFlag(display))
+            {
+                Console.WriteLine(Header);
+                Console.WriteLine();
+            }
+        }
 
         public string HelpAdvice => "Try '--help' for more information.";
 
-        public string HelpText => String.Join('\n', new string[]
-        {
-            //2345678901234567890123456789012345678901234567890123456789012345678901234567890
-            "<desc>",
-            "",
-            "  Usage: VSMEdit <options>",
-            "",
-            "    -h, --help                 Prints this help message.",
-            "    -a, --attributes           Lists the supported attributes.",
-            "",
-            "",
-            "  Usage: VSMEdit [options] <plugin>",
-            "",
-            "    -g, --get <attr>           Returns the value of an attribute.",
-            "    -s, --set <attr> <value>   Sets the value of an attribute.",
-            "",
-            "    plugin                     A Vectorworks Script plugin file.",
-            "                               (.vsm, .vso, .vst)",
-            "",
-            "",
-            "  i.e. VSMEdit -n=\"My Tool\" MyToolCW.vsm",
-            "",
-            "  Error codes:",
-            "      0   Operation succeeded.",
-            "      1   Invalid or not supported year.",
-            "      2   No Server selected.",
-            "      3   Connection failed.",
-            "      4   Merging failed.",
-            //"     10   Connectivity test succeeded.",
-            //"     11   Connectivity test failed.",
-            "    100   Help message displayed.",
-            "    101   No arguments.",
-            "    102   Invalid arguments.",
-        });
+        public string HelpText => String.Join('\n', GetHelpTextLines());
 
         public void WriteError(Exception ex)
         {
