@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.Versioning;
 using System.Text;
@@ -58,7 +59,8 @@ namespace VWLmergeR
 
         public ProgramBase(string[] args)
         {
-            Arguments = args;
+            // Convert to from "current" to UTF-8!
+            Arguments = ConvertDefaultEncodingTo(args, Encoding.UTF8);
         }
 
         public void Main()
@@ -73,6 +75,13 @@ namespace VWLmergeR
 
             // Also works for osx/linux ...
             Environment.Exit(exitcode);
+        }
+
+        public string[] ConvertDefaultEncodingTo(string[] args, Encoding encoding)
+        {
+            return args
+                .Select(a => Encoding.Default.GetBytes(a))
+                .Select(b => encoding.GetString(b)).ToArray();
         }
 
         public int HandleArgs(string[] args)

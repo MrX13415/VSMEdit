@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.IO.Binary;
 using System.Linq;
 using System.Reflection;
@@ -101,7 +102,33 @@ namespace VWLmergeR
 
         public override int Run()
         {
+            if (!File.Exists(FilePath))
+            {
+                Console.WriteLine($"Error: File not found: '{FilePath}'");
+                return 2;
+            }
+
             Plugin plugin = new Plugin(FilePath);
+
+            if (!plugin.IsValid())
+            {
+                Console.WriteLine($"Invalid or not a Vectorworks script plugin.");
+                return 1;
+            }
+
+            FileVersion version = (FileVersion) plugin.Read(Plugin.Field.FileVersion);
+            if (version != Plugin.FieldData.FileVersion.Current) //
+            {
+                Console.WriteLine($"Unsupported plugin format version: {(byte)version}");
+                Console.WriteLine($"Only plugins from Vectorworks 2018 (23.x) and later are supported!");
+                return 1;
+            }
+            if (version > Plugin.FieldData.FileVersion.Current) //
+            {
+                Console.WriteLine($"Unsupported plugin format version: {(byte)version}");
+                Console.WriteLine($"The version of the specifed plugin is newer then the supported version.");
+                return 1;
+            }
 
             try
             {
@@ -132,19 +159,19 @@ namespace VWLmergeR
             catch (Plugin.FieldNotFoundException)
             {
                 Console.WriteLine($"Attribute with name '{FieldName}' could not be found!");
-                return 2;
+                return 3;
             }
             catch (Plugin.FieldAmbiguityException)
             {
                 Console.WriteLine($"Too many possiblities for '{FieldName}':");
                 Plugin.Field.Fields().ToList()
                     .ForEach(f => Console.WriteLine($"   {f.Name}"));
-                return 3;
+                return 4;
             }
             catch (Plugin.ReadOnlyFieldException)
             {
                 Console.WriteLine($"Attribute with name '{FieldName}' is read only and can not be changed!");
-                return 4;
+                return 6;
             }
         }
 
@@ -215,7 +242,7 @@ namespace VWLmergeR
                 {
                     Console.WriteLine($"Warning: The text to be set exceeds the allowed maximum length ({strField.StringMaxLength} characters) of the specified attribute.");
                     Console.WriteLine($"The text has been truncate to: '{value.Substring(0, strField.StringMaxLength)}'");
-                    code = 5;
+                    code = 6;
                 }
                 plugin.Write(strField, value);
                 return (true, code);
@@ -275,10 +302,11 @@ namespace VWLmergeR
                 "  Error codes:",
                 "      0   Operation succeeded.",
                 "      1   Unexpected error.",
-                "      2   Attribute not found.",
-                "      3   Ambiguous attribute.",
-                "      4   Attribute is read only.",
-                "      5   Input value truncate.",
+                "      2   File not found or readable/writeable.",
+                "      3   Attribute not found.",
+                "      4   Ambiguous attribute.",
+                "      5   Attribute is read only.",
+                "      6   Input value truncate.",
                 "    100   Help message displayed.",
                 "    101   No arguments.",
                 "    102   Invalid arguments.",

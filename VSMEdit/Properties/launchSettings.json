@@ -63,7 +63,7 @@
     },
     "Set: UniversalName": {
       "commandName": "Project",
-      "commandLineArgs": "--set UniversalName \"MyToolCW\" \"$(SolutionDir)\\VSMEdit\\TestFiles\\MyToolCW.vsm\""
+      "commandLineArgs": "--set UniversalName \"MyToolCW…\" \"$(SolutionDir)\\VSMEdit\\TestFiles\\MyToolCW.vsm\""
     },
     "Test: Set too long UniversalName": {
       "commandName": "Project",

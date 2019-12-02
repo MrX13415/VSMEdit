@@ -66,6 +66,12 @@ namespace System.IO.Binary
             stream.Write(data, 0, data.Length);
         }
 
+        public void ClearData(Stream stream)
+        {
+            byte[] buffer = new byte[Length];
+            SetData(stream, buffer);
+        }
+
         public static uint GetByteSize<T>()
         {
             T var = default(T);
@@ -116,6 +122,7 @@ namespace System.IO.Binary
         public void SetValue(Stream stream, T value)
         {
             byte[] data = GetBytes(value, StringMaxLength);
+            ClearData(stream); // Set all bytes to 0 first!
             SetData(stream, data);
         }
 
@@ -184,7 +191,10 @@ namespace System.IO.Binary
             if (length <= 0) return "";
 
             Index end = new Index(length + 1);
-            return encoding.GetString(data[1..end]);
+            var t = encoding.GetString(data[1..end]);
+            var e = encoding.GetBytes(t);
+
+            return t;
         }
 
         public static byte[] GetBytes(string text, byte maxLength = byte.MaxValue, Encoding encoding = null)
@@ -195,8 +205,9 @@ namespace System.IO.Binary
             encoding = encoding ?? Encoding.UTF8;
 
             if (text.Length > maxLength) text = text.Substring(0, maxLength);
-            var data = new byte[] { (byte)text.Length };
-            return data.Concat(encoding.GetBytes(text)).ToArray();
+            var data = encoding.GetBytes(text);
+            var len = new byte[] { (byte)data.Length };
+            return len.Concat(data).ToArray();
         }
     }
 

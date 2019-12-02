@@ -31,5 +31,20 @@ namespace VSMEdit.Vectorworks
             }
         }
    
+        public bool IsValid()
+        {
+            if (PluginFile.Length <= 4) return false;
+            using (BinaryReader reader = new BinaryReader(Open()))
+            {
+                char m1 = reader.ReadChar();
+                char m2 = reader.ReadChar();
+                char m3 = reader.ReadChar();
+                char m4 = reader.ReadChar();
+
+                if (m1 == 'M' && m2 == 'C' && m3 == 'V' && m4 == 'S') return true;
+            }
+
+            return false;
+        }
     }
 }
