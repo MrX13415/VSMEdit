@@ -1,8 +1,7 @@
-VSMEdit
-Version 2.0
+VSMEdit (2)
+Version 1.0
 
-Utility to edit various properties of VSM/VST/VSO plugin files for Vectorworks.
-(Version 1.x was made with xojo)
+A command line utility for changing various attributes of script plugins from Vectorworks.
 
 Use '--help' for more information.
 
@@ -19,18 +18,14 @@ System Requirements:
 	 
     MacOS: (x64 only)
      - MacOS 10.13 or later
-	 
-    Linux: (x64 only)
-     - Red Hat Linux 6 or later
-     - CentOS 7 or later
-     - Oracle Linux 7 or later
-     - Fedora 29 or later
-     - Debian 9 or later
-     - Ubuntu 16.04 or later
-     - Linux Mint 18 or later
-     - openSUSE 15 or later
-     - SUSE Linux 12 SP2 or later
-     - Alpine Linux 3.8 or later
 
 
 (c) 2019 ComputerWorks GmbH. All rights reserved.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
