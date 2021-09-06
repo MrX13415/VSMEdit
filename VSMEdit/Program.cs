@@ -117,17 +117,17 @@ namespace VWLmergeR
             }
 
             FileVersion version = (FileVersion) plugin.Read(Plugin.Field.FileVersion);
-            if (version != Plugin.FieldData.FileVersion.Current) //
+            if (version < Plugin.FieldData.FileVersion.Min) 
             {
-                Console.WriteLine($"Unsupported plugin format version: {(byte)version}");
+                Console.WriteLine($"Invalid or Unsupported plugin format version: {(byte)version}");
                 Console.WriteLine($"Only plugins from Vectorworks 2018 (23.x) and later are supported!");
                 return 1;
             }
             if (version > Plugin.FieldData.FileVersion.Current) //
             {
-                Console.WriteLine($"Unsupported plugin format version: {(byte)version}");
-                Console.WriteLine($"The version of the specifed plugin is newer then the supported version.");
-                return 1;
+                Console.WriteLine($"Warning: Unknown plugin format version: {(byte)version}");
+                Console.WriteLine($"         The version of the specifed plugin is newer then the supported version.");
+                Console.WriteLine($"         Getting or setting any attribute may or may not work.");
             }
 
             try

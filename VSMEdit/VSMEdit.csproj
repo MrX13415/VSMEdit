@@ -3,16 +3,17 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <Copyright>(c) 2019 ComputerWorks GmbH. All rights reserved.</Copyright>
-    <Version>1.0</Version>
+    <Copyright>(c) 2021 ComputerWorks GmbH. All rights reserved.</Copyright>
+    <Version>1.1</Version>
     <Authors>Oliver Daus</Authors>
     <Company>ComputerWorks GmbH</Company>
     <Product>Vectorworks</Product>
     <Description>A command line utility for changing various attributes of Vectorworks script plugins. (.vsm; .vso; .vst)</Description>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageId>VSMEdit</PackageId>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
+    <RepositoryUrl>https://github.com/MrX13415/VSMEdit</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

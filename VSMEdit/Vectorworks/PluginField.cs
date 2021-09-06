@@ -30,8 +30,9 @@ namespace VSMEdit.Vectorworks
             public enum FileVersion
             {
                 Unknown = -1,
-                Current = 12,         // Current version of file format
-                UnicodeSupport = 12   // UTF-8 strings are saved in file version 12 and later. Vectorworks 23.x.  
+                Min = 1,
+                UnicodeSupport = 12,  // UTF-8 strings are saved in file version 12 and later. Vectorworks 23.x.
+                Current = 13,         // Current "known" file format version as 08-2021
             }
 
             public static string GetFileVersionInfo(byte version)
