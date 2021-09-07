@@ -1,5 +1,5 @@
-VSMEdit (2)
-Version 1.0
+VSMEdit (II)
+Version 1.1
 
 A command line utility for changing various attributes of script plugins from Vectorworks.
 
@@ -20,7 +20,7 @@ System Requirements:
      - MacOS 10.13 or later
 
 
-(c) 2019 ComputerWorks GmbH. All rights reserved.
+(c) 2021 ComputerWorks GmbH. All rights reserved.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
